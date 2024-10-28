@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Conform Speedometer
+Type=Application
+Comment=Conform speedometer
+Exec=sudo /usr/bin/python /home/pi/ConformSpeedometer/main.py
+Terminal=true
