@@ -2,5 +2,5 @@
 Name=Stats Webapp
 Type=Application
 Comment=Conform speedometer webapp
-Exec=/usr/bin/python /home/pi/ConformSpeedometer/web/web.py
+Exec=sudo /usr/bin/python /home/pi/ConformSpeedometer/web/web.py
 Terminal=true

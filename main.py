@@ -19,10 +19,10 @@ from platform import system as sys
 RELAY_CH1 = 26
 RELAY_CH2 = 20
 RELAY_CH3 = 21
-SENSOR_PIN1 = 6
-SENSOR_PIN2 = 6
-SENSOR_PIN3 = 6
-SENSOR_PIN4 = 6
+SENSOR_PIN1 = 4
+SENSOR_PIN2 = 27
+SENSOR_PIN3 = 21
+SENSOR_PIN4 = 13
 
 lengthSavePeriod = 5    ## period in seconds in which the current length is saved for backup in case of power outage, crash, etc..
 maxPulseInterval1 = 3    ## max time in seconds between impulses for sensor
