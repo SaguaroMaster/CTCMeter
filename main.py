@@ -255,6 +255,7 @@ maxLength4 = deque(maxlen = int(savePeriod / samplePeriod) + 1)
 
 def pulseCallback1(self):
    global pulseCount21, speed1, maxPulseInterval1, wheelCircumference1, lastPulse1
+   print("Pulse S1")
    pulseCount21 = pulseCount21 + 1
    timeDiff1 = time.time() - lastPulse1
    if timeDiff1 > 0.005 and timeDiff1 < maxPulseInterval1:
@@ -264,6 +265,7 @@ def pulseCallback1(self):
 
 def pulseCallback2(self):
    global pulseCount22, speed2, maxPulseInterval2, wheelCircumference2, lastPulse2
+   print("Pulse S2")
    pulseCount22 = pulseCount22 + 1
    timeDiff2 = time.time() - lastPulse2
    if timeDiff2 > 0.005 and timeDiff2 < maxPulseInterval2:
@@ -273,6 +275,7 @@ def pulseCallback2(self):
 
 def pulseCallback3(self):
    global pulseCount23, speed3, maxPulseInterval3, wheelCircumference3, lastPulse3
+   print("Pulse S3")
    pulseCount23 = pulseCount23 + 1
    timeDiff3 = time.time() - lastPulse3
    if timeDiff3 > 0.005 and timeDiff3 < maxPulseInterval3:
@@ -282,6 +285,7 @@ def pulseCallback3(self):
 
 def pulseCallback4(self):
    global pulseCount24, speed4, maxPulseInterval4, wheelCircumference4, lastPulse4
+   print("Pulse S4")
    pulseCount24 = pulseCount24 + 1
    timeDiff4 = time.time() - lastPulse3
    if timeDiff4 > 0.005 and timeDiff4 < maxPulseInterval4:
