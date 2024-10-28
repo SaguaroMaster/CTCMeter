@@ -85,7 +85,7 @@ else:
 
    relay1 = GPIO.LED(RELAY_CH1, active_high=False)
    relay2 = GPIO.LED(RELAY_CH2, active_high=False) 
-   sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, active_state = True, bounce_time = 0.001)
+   sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, bounce_time = 0.001)
    sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = None, active_state = True, bounce_time = 0.001)
    sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = None, active_state = True, bounce_time = 0.001)
    sensor4 = GPIO.Button(SENSOR_PIN4, pull_up = None, active_state = True, bounce_time = 0.001)
