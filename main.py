@@ -415,14 +415,14 @@ while True:
       time4 = time.time()
 
       print(f'''
-         Line 1 Speed: {speed1} m/min
-         Line 1 Length: {length1} m
-         Line 2 Speed: {speed2} m/min
-         Line 2 Length: {length2} m
-         Line 3 Speed: {speed3} m/min
-         Line 3 Length: {length3} m
-         Line 4 Speed: {speed4} m/min
-         Line 4 Length: {length4} m
+         Line 1 Speed : {speed1}  [m/min]
+         Line 1 Length: {length1} [m]
+         Line 2 Speed : {speed2}  [m/min]
+         Line 2 Length: {length2} [m]
+         Line 3 Speed : {speed3}  [m/min]
+         Line 3 Length: {length3} [m]
+         Line 4 Speed : {speed4}  [m/min]
+         Line 4 Length: {length4} [m]
       ''')
 
    if speed1 == 0 and machineState1 == 1:
