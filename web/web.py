@@ -248,8 +248,7 @@ def index():
         DatesSum1[i] = DatesSum1[i][:7]
 
     productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 1) * 100, 0)
-    print(productivity30d)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
 
     templateData = {
         'speed'						: power,
@@ -304,6 +303,9 @@ def my_form_post():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -320,8 +322,10 @@ def my_form_post():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -363,6 +367,9 @@ def index2():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -379,8 +386,10 @@ def index2():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -414,6 +423,9 @@ def my_form_post2():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -430,8 +442,10 @@ def my_form_post2():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -473,6 +487,9 @@ def index3():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -489,8 +506,10 @@ def index3():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -524,6 +543,9 @@ def my_form_post3():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -540,8 +562,10 @@ def my_form_post3():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -583,6 +607,9 @@ def index4():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -599,8 +626,10 @@ def index4():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
@@ -634,6 +663,9 @@ def my_form_post4():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -650,8 +682,10 @@ def my_form_post4():
         'lengthY'		        	: Lengths,
         'downTime24h'               : totalStoppedTime24h,
         'timesStopped24h'           : timesStopped24h,
+        'productivity24h'           : productivity24h,
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
+        'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed
     }
 
