@@ -713,7 +713,7 @@ def downtime24hl4():
 def downtime30dl1():
     global numSamples2   
     
-    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2)
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 1)
 
     formattedString = []
 
@@ -726,7 +726,7 @@ def downtime30dl1():
 def downtime30dl2():
     global numSamples2   
     
-    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2)
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 2)
 
     formattedString = []
 
@@ -739,7 +739,7 @@ def downtime30dl2():
 def downtime30dl3():
     global numSamples2   
     
-    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2)
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 3)
 
     formattedString = []
 
@@ -752,7 +752,7 @@ def downtime30dl3():
 def downtime30dl4():
     global numSamples2   
     
-    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2)
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 4)
 
     formattedString = []
 
