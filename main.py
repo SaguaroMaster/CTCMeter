@@ -86,9 +86,9 @@ else:
    relay1 = GPIO.LED(RELAY_CH1, active_high=False)
    relay2 = GPIO.LED(RELAY_CH2, active_high=False) 
    sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, bounce_time = 0.001)
-   sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = None, active_state = True, bounce_time = 0.001)
-   sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = None, active_state = True, bounce_time = 0.001)
-   sensor4 = GPIO.Button(SENSOR_PIN4, pull_up = None, active_state = True, bounce_time = 0.001)
+   sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = False, bounce_time = 0.001)
+   sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = False, bounce_time = 0.001)
+   sensor4 = GPIO.Button(SENSOR_PIN4, pull_up = False, bounce_time = 0.001)
 
 
 if not os.path.isfile(databaseName):
@@ -287,7 +287,7 @@ def pulseCallback4(self):
    global pulseCount24, speed4, maxPulseInterval4, wheelCircumference4, lastPulse4
    print("Pulse S4")
    pulseCount24 = pulseCount24 + 1
-   timeDiff4 = time.time() - lastPulse3
+   timeDiff4 = time.time() - lastPulse4
    if timeDiff4 > 0.005 and timeDiff4 < maxPulseInterval4:
       speed4 = 60 / timeDiff4 * wheelCircumference4
 
