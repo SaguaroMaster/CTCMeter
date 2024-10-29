@@ -248,13 +248,8 @@ def index():
         DatesSum1[i] = DatesSum1[i][:7]
 
     productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 1) * 100, 0)
 
-    print(productivity24h)
-    print(productivity30d)
-    print(totalStoppedTime30d)
-    print(timedelta(hours = 24))
-    print(totalStoppedTime30d / timedelta(days = 1)*100)
 
     templateData = {
         'speed'						: power,
