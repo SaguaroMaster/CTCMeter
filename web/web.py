@@ -24,6 +24,12 @@ curs=conn.cursor()
 
 lock = threading.Lock()
 
+def logIp(page):
+
+    ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
+    curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip, page))
+    conn.commit()
+
 def getLastData(lineNum):
     for row in curs.execute("SELECT * FROM data"+ str(lineNum) +" ORDER BY timestamp DESC LIMIT 1"):
         time = row[0]
@@ -221,7 +227,7 @@ def getAvgSpeed(numSamples2, lineNum):
 def index():
     global  numSamples1, numSamples2
     setGlobalVars()
-
+    logIp("index_line1")
 
     numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
@@ -280,6 +286,8 @@ def my_form_post():
     global  numSamples1, numSamples2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
+
+    logIp("index_line1_getDate " + str(numSamples2))
 
     numSamples1_disp = str(numSamples1)[:10]
     numSamples2_disp = str(numSamples2)[:10]
@@ -341,7 +349,7 @@ def my_form_post():
 def index2():
     global  numSamples1, numSamples2
     setGlobalVars()
-
+    logIp("index_line2")
 
     numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
@@ -400,6 +408,8 @@ def my_form_post2():
     global  numSamples1, numSamples2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
+
+    logIp("index_line2_getDate " + str(numSamples2))
 
     numSamples1_disp = str(numSamples1)[:10]
     numSamples2_disp = str(numSamples2)[:10]
@@ -461,7 +471,7 @@ def my_form_post2():
 def index3():
     global  numSamples1, numSamples2
     setGlobalVars()
-
+    logIp("index_line3")
 
     numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
@@ -520,6 +530,8 @@ def my_form_post3():
     global  numSamples1, numSamples2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
+
+    logIp("index_line3_getDate " + str(numSamples2))
 
     numSamples1_disp = str(numSamples1)[:10]
     numSamples2_disp = str(numSamples2)[:10]
@@ -581,6 +593,7 @@ def my_form_post3():
 def index4():
     global  numSamples1, numSamples2
     setGlobalVars()
+    logIp("index_line4")
 
 
     numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
@@ -641,6 +654,8 @@ def my_form_post4():
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
+    logIp("index_line4_getDate " + str(numSamples2))
+
     numSamples1_disp = str(numSamples1)[:10]
     numSamples2_disp = str(numSamples2)[:10]
     numSamples2 = numSamples2 + timedelta(days=1, hours=6)
@@ -700,6 +715,8 @@ def download():
 @app.route("/downtime24hl1")
 def downtime24hl1():
     global numSamples2
+
+    logIp("downtime24hl1 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 1)
 
@@ -713,6 +730,8 @@ def downtime24hl1():
 @app.route("/downtime24hl2")
 def downtime24hl2():
     global numSamples2
+
+    logIp("downtime24hl2 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 2)
 
@@ -726,6 +745,8 @@ def downtime24hl2():
 @app.route("/downtime24hl3")
 def downtime24hl3():
     global numSamples2
+
+    logIp("downtime24hl3 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 3)
 
@@ -739,6 +760,8 @@ def downtime24hl3():
 @app.route("/downtime24hl4")
 def downtime24hl4():
     global numSamples2
+
+    logIp("downtime24hl4 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 4)
 
@@ -752,6 +775,8 @@ def downtime24hl4():
 @app.route("/downtime30dl1")
 def downtime30dl1():
     global numSamples2   
+
+    logIp("downtime30dl1 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 1)
 
@@ -764,7 +789,9 @@ def downtime30dl1():
 
 @app.route("/downtime30dl2")
 def downtime30dl2():
-    global numSamples2   
+    global numSamples2  
+
+    logIp("downtime30dl2 " + str(numSamples2)) 
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 2)
 
@@ -777,7 +804,9 @@ def downtime30dl2():
 
 @app.route("/downtime30dl3")
 def downtime30dl3():
-    global numSamples2   
+    global numSamples2
+
+    logIp("downtime30dl3 " + str(numSamples2))   
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 3)
 
@@ -791,6 +820,8 @@ def downtime30dl3():
 @app.route("/downtime30dl4")
 def downtime30dl4():
     global numSamples2   
+
+    logIp("downtime30dl4 " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityMonth(numSamples2, 4)
 
@@ -804,6 +835,8 @@ def downtime30dl4():
 @app.route("/help")
 def help():
     global  numSamples1, numSamples2
+
+    logIp("help")
     
     lastDate, power, length, ads = getLastData(1)
     power = round(power, 2)

@@ -112,6 +112,8 @@ if not os.path.isfile(databaseName):
    conn.commit()
    curs.execute("CREATE TABLE settings(timestamp DATETIME, sampling_period REAL, saving_period NUMERIC, circumference1 NUMERIC, circumference2 NUMERIC, circumference3 NUMERIC, circumference4 NUMERIC);")
    conn.commit()
+   curs.execute("CREATE TABLE log(timestamp DATETIME, ip TINYTEXT, page TINYTEXT);")
+   conn.commit()
    curs.execute("INSERT INTO settings values(datetime('now', 'localtime'), 0.1, 300, (?), (?), (?), (?));", (wheelCircumference1, wheelCircumference2, wheelCircumference3, wheelCircumference4))
    conn.commit()
    curs.execute("INSERT INTO stops1 values(datetime('now', 'localtime'), False, False);")
