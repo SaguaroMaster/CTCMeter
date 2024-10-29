@@ -30,6 +30,11 @@ def logIp(page):
     curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip, page))
     conn.commit()
 
+def readLog():
+    curs.execute("SELECT * FROM log;")
+    data = curs.fetchall()
+    return data
+
 def getLastData(lineNum):
     for row in curs.execute("SELECT * FROM data"+ str(lineNum) +" ORDER BY timestamp DESC LIMIT 1"):
         time = row[0]
@@ -861,6 +866,11 @@ def help():
 
     return render_template('help.html', **templateData)
 
+@app.route("/log")
+def log():
+    logIp("log")
+    logs = readLog()
+    return logs
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=8000, debug=False)
