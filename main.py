@@ -259,7 +259,7 @@ def pulseCallback1(self):
    pulseCount21 = pulseCount21 + 1
    timeDiff1 = time.time() - lastPulse1
    if timeDiff1 > 0.005 and timeDiff1 < maxPulseInterval1:
-      speed1 = 60 / timeDiff1 * wheelCircumference1
+      speed1 = round(60 / timeDiff1 * wheelCircumference1, 1)
 
    lastPulse1 = time.time()
 
@@ -269,7 +269,7 @@ def pulseCallback2(self):
    pulseCount22 = pulseCount22 + 1
    timeDiff2 = time.time() - lastPulse2
    if timeDiff2 > 0.005 and timeDiff2 < maxPulseInterval2:
-      speed2 = 60 / timeDiff2 * wheelCircumference2
+      speed2 = round(60 / timeDiff2 * wheelCircumference2, 1)
 
    lastPulse2 = time.time()
 
@@ -279,7 +279,7 @@ def pulseCallback3(self):
    pulseCount23 = pulseCount23 + 1
    timeDiff3 = time.time() - lastPulse3
    if timeDiff3 > 0.005 and timeDiff3 < maxPulseInterval3:
-      speed3 = 60 / timeDiff3 * wheelCircumference3
+      speed3 = round(60 / timeDiff3 * wheelCircumference3, 1)
 
    lastPulse3 = time.time()
 
@@ -289,7 +289,7 @@ def pulseCallback4(self):
    pulseCount24 = pulseCount24 + 1
    timeDiff4 = time.time() - lastPulse4
    if timeDiff4 > 0.005 and timeDiff4 < maxPulseInterval4:
-      speed4 = 60 / timeDiff4 * wheelCircumference4
+      speed4 = round(60 / timeDiff4 * wheelCircumference4, 1)
 
    lastPulse4 = time.time()
 
