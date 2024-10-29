@@ -245,7 +245,7 @@ def index():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -296,7 +296,7 @@ def my_form_post():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -355,7 +355,7 @@ def index2():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -406,7 +406,7 @@ def my_form_post2():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -465,7 +465,7 @@ def index3():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -516,7 +516,7 @@ def my_form_post3():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -575,7 +575,7 @@ def index4():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
@@ -626,7 +626,7 @@ def my_form_post4():
       Dates[i] = Dates[i][5:16]
 
     for i in range(len(DatesSum1)):
-        DatesSum1[i] = DatesSum1[i][:11]
+        DatesSum1[i] = DatesSum1[i][:8]
 
     templateData = {
         'speed'						: power,
