@@ -657,11 +657,50 @@ def download():
     return send_from_directory("/home/pi", "Database.db")
 
 
-@app.route("/downtime24h")
-def downtime24h():
+@app.route("/downtime24hl1")
+def downtime24hl1():
     global numSamples2
     
-    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2)
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 1)
+
+    formattedString = []
+
+    for i in StoppedDates24h:
+        formattedString.append([str(i[0]), str(i[1])])
+
+    return formattedString
+
+@app.route("/downtime24hl2")
+def downtime24hl2():
+    global numSamples2
+    
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 2)
+
+    formattedString = []
+
+    for i in StoppedDates24h:
+        formattedString.append([str(i[0]), str(i[1])])
+
+    return formattedString
+
+@app.route("/downtime24hl3")
+def downtime24hl3():
+    global numSamples2
+    
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 3)
+
+    formattedString = []
+
+    for i in StoppedDates24h:
+        formattedString.append([str(i[0]), str(i[1])])
+
+    return formattedString
+
+@app.route("/downtime24hl4")
+def downtime24hl4():
+    global numSamples2
+    
+    totalStoppedTime24h, timesStopped24h, StoppedDates24h = getProductivityToday(numSamples2, 4)
 
     formattedString = []
 
@@ -687,7 +726,7 @@ def downtime30d():
 def help():
     global  numSamples1, numSamples2
     
-    lastDate, power, length, ads = getLastData()
+    lastDate, power, length, ads = getLastData(1)
     power = round(power, 2)
     length = round(length, 2)
 
