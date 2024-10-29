@@ -254,7 +254,7 @@ def index():
     print(productivity30d)
     print(totalStoppedTime30d)
     print(timedelta(hours = 24))
-    print(totalStoppedTime30d / timedelta(days = 1))
+    print(totalStoppedTime30d / timedelta(days = 1)*100)
 
     templateData = {
         'speed'						: power,
