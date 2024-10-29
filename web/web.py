@@ -247,8 +247,8 @@ def index():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -303,8 +303,8 @@ def my_form_post():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -367,8 +367,8 @@ def index2():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -423,8 +423,8 @@ def my_form_post2():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -487,8 +487,8 @@ def index3():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -543,8 +543,8 @@ def my_form_post3():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -607,8 +607,8 @@ def index4():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
@@ -663,8 +663,8 @@ def my_form_post4():
     for i in range(len(DatesSum1)):
         DatesSum1[i] = DatesSum1[i][:7]
 
-    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 0)
-    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 0)
+    productivity24h = round(totalStoppedTime24h / timedelta(hours = 24) * 100, 1)
+    productivity30d = round(totalStoppedTime30d / timedelta(days = 30) * 100, 1)
 
     templateData = {
         'speed'						: power,
