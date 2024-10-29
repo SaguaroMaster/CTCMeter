@@ -358,10 +358,10 @@ except:
 
 while True:
 
-   length1 = pulseCount21 * wheelCircumference1
-   length2 = pulseCount22 * wheelCircumference2
-   length3 = pulseCount23 * wheelCircumference3
-   length4 = pulseCount24 * wheelCircumference4
+   length1 = round(pulseCount21 * wheelCircumference1, 1)
+   length2 = round(pulseCount22 * wheelCircumference2, 1)
+   length3 = round(pulseCount23 * wheelCircumference3, 1)
+   length4 = round(pulseCount24 * wheelCircumference4, 1)
 
    if time.time() > time2 + samplePeriod:
       time2 = time.time()
