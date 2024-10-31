@@ -25,14 +25,14 @@ SENSOR_PIN3 = 21
 SENSOR_PIN4 = 13
 
 lengthSavePeriod = 5    ## period in seconds in which the current length is saved for backup in case of power outage, crash, etc..
-maxPulseInterval1 = 3    ## max time in seconds between impulses for sensor
-maxPulseInterval2 = 3    ## max time in seconds between impulses for sensor
-maxPulseInterval3 = 3    ## max time in seconds between impulses for sensor
-maxPulseInterval4 = 3    ## max time in seconds between impulses for sensor
-wheelCircumference1 = 0.1 ## length per impulse in meters
-wheelCircumference2 = 0.1 ## length per impulse in meters
-wheelCircumference3 = 0.1 ## length per impulse in meters
-wheelCircumference4 = 0.1 ## length per impulse in meters
+maxPulseInterval1 = 4    ## max time in seconds between impulses for sensor
+maxPulseInterval2 = 4    ## max time in seconds between impulses for sensor
+maxPulseInterval3 = 4    ## max time in seconds between impulses for sensor
+maxPulseInterval4 = 4    ## max time in seconds between impulses for sensor
+wheelCircumference1 = 0.025 ## length per impulse in meters
+wheelCircumference2 = 0.025 ## length per impulse in meters
+wheelCircumference3 = 0.025 ## length per impulse in meters
+wheelCircumference4 = 0.025 ## length per impulse in meters
 
 ## INITIALIZE VARIABLES ||DON'T EDIT||
 pulseCount = 0
