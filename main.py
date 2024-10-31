@@ -15,16 +15,13 @@ from statistics import mean
 from collections import deque
 from platform import system as sys
 
-## GPIO PINS TO USE FOR RELAYS AND SENSOR
-RELAY_CH1 = 26
-RELAY_CH2 = 20
-RELAY_CH3 = 21
+## GPIO PINS TO USE FOR SENSOR
 SENSOR_PIN1 = 4
 SENSOR_PIN2 = 27
 SENSOR_PIN3 = 21
 SENSOR_PIN4 = 13
 
-lengthSavePeriod = 5    ## period in seconds in which the current length is saved for backup in case of power outage, crash, etc..
+lengthSavePeriod = 3    ## period in seconds in which the current length is saved for backup in case of power outage, crash, etc..
 maxPulseInterval1 = 4    ## max time in seconds between impulses for sensor
 maxPulseInterval2 = 4    ## max time in seconds between impulses for sensor
 maxPulseInterval3 = 4    ## max time in seconds between impulses for sensor
@@ -42,8 +39,8 @@ pulseCount23 = 0
 pulseCount24 = 0
 
 samplePeriod = 0.1 #seconds
-savePeriod = 300 #seconds
-time2 = time.time()-5
+savePeriod = 60 #seconds
+time2 = time.time()-lengthSavePeriod
 time3 = time2
 time4 = time3
 
@@ -83,8 +80,6 @@ else:
 
    import gpiozero as GPIO
 
-   relay1 = GPIO.LED(RELAY_CH1, active_high=False)
-   relay2 = GPIO.LED(RELAY_CH2, active_high=False) 
    sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, bounce_time = 0.001)
    sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = False, bounce_time = 0.001)
    sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = False, bounce_time = 0.001)
@@ -114,7 +109,7 @@ if not os.path.isfile(databaseName):
    conn.commit()
    curs.execute("CREATE TABLE log(timestamp DATETIME, ip TINYTEXT, page TINYTEXT);")
    conn.commit()
-   curs.execute("INSERT INTO settings values(datetime('now', 'localtime'), 0.1, 300, (?), (?), (?), (?));", (wheelCircumference1, wheelCircumference2, wheelCircumference3, wheelCircumference4))
+   curs.execute("INSERT INTO settings values(datetime('now', 'localtime'), (?), (?), (?), (?), (?), (?));", (samplePeriod, savePeriod, wheelCircumference1, wheelCircumference2, wheelCircumference3, wheelCircumference4))
    conn.commit()
    curs.execute("INSERT INTO stops1 values(datetime('now', 'localtime'), False, False);")
    conn.commit()
@@ -301,14 +296,13 @@ if OS != 'Windows':
    sensor3.when_released = pulseCallback3
    sensor4.when_released = pulseCallback4
 
-
 date1, machineState1 = getLastStopState(1)
 date2, machineState2 = getLastStopState(2)
 date3, machineState3 = getLastStopState(3)
 date4, machineState4 = getLastStopState(4)
 
 try:
-   if os.path.isfile(saveFilePath1) and os.path.isfile(saveFilePath2) and os.path.isfile(saveFilePath3):
+   if os.path.isfile(saveFilePath1) and os.path.isfile(saveFilePath2) and os.path.isfile(saveFilePath3) and os.path.isfile(saveFilePath4):
       f1 = open(saveFilePath1, "r")
       length1 = float(f1.read())
       f1.close()
