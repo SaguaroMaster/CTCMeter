@@ -32,7 +32,6 @@ wheelCircumference3 = 0.025 ## length per impulse in meters
 wheelCircumference4 = 0.025 ## length per impulse in meters
 
 ## INITIALIZE VARIABLES ||DON'T EDIT||
-pulseCount = 0
 pulseCount21 = 0
 pulseCount22 = 0
 pulseCount23 = 0
