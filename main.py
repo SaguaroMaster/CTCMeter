@@ -434,7 +434,7 @@ while True:
       machineState2 = 1
       logStops(machineState2, 2)
 
-   if speed1 == 0 and machineState3 == 1:
+   if speed3 == 0 and machineState3 == 1:
       machineState3 = 0
       logStops(machineState3, 3)
    elif speed3 != 0 and machineState3 == 0:
