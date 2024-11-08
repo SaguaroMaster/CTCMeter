@@ -10,6 +10,8 @@ import pandas
 import dateutil.relativedelta
 import sqlite3
 import platform
+import os
+import csv
 
 
 app = Flask(__name__)
@@ -227,8 +229,16 @@ def getAvgSpeed(numSamples2, lineNum):
 
     return avgSpeed
 
+def saveToExcel(csvName):
+    curs.execute("SELECT * FROM data;")
+    data = curs.fetchall()
+    if os.path.isfile(csvName):
+        os.remove(csvName) 
 
-
+    with open(csvName, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Date and Time', 'Speed [m/min]', 'Length [m]', 'Alarm Setting [m]'])
+        writer.writerows(data)
 
 
 
@@ -741,6 +751,13 @@ def download():
 
     return send_from_directory("/home/pi", "Database.db")
 
+@app.route('/downloadcsv', methods=['GET', 'POST'])
+def downloadcsv():
+    logIp("downloadCSV")
+
+    csvName = 'ExportedData.csv'
+    saveToExcel(csvName)
+    return send_from_directory("/home/pi", csvName)
 
 @app.route("/downtime24hl1")
 def downtime24hl1():
