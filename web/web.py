@@ -9,9 +9,18 @@ import threading
 import pandas
 import dateutil.relativedelta
 import sqlite3
+import platform
 
 
 app = Flask(__name__)
+hostName = str(platform.node())
+
+if hostName == 'ctcpi':
+    lineType = 'CTC'
+elif hostName == 'tapingpi':
+    lineType = 'Taping'
+else:
+    lineType = 'unknown device/hostname'
 
 
 if sys() == 'Windows':
@@ -230,7 +239,7 @@ def getAvgSpeed(numSamples2, lineNum):
 ######################################################################
 @app.route("/")
 def index():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     setGlobalVars()
     logIp("index_line1")
 
@@ -281,14 +290,16 @@ def index():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line1.html', **templateData)
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -339,7 +350,9 @@ def my_form_post():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line1.html', **templateData)
@@ -352,7 +365,7 @@ def my_form_post():
 ######################################################################
 @app.route("/line2")
 def index2():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     setGlobalVars()
     logIp("index_line2")
 
@@ -403,14 +416,16 @@ def index2():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line2.html', **templateData)
 
 @app.route('/line2', methods=['POST'])
 def my_form_post2():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -461,7 +476,9 @@ def my_form_post2():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line2.html', **templateData)
@@ -474,7 +491,7 @@ def my_form_post2():
 ######################################################################
 @app.route("/line3")
 def index3():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     setGlobalVars()
     logIp("index_line3")
 
@@ -525,14 +542,16 @@ def index3():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line3.html', **templateData)
 
 @app.route('/line3', methods=['POST'])
 def my_form_post3():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -583,7 +602,9 @@ def my_form_post3():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line3.html', **templateData)
@@ -596,7 +617,7 @@ def my_form_post3():
 ######################################################################
 @app.route("/line4")
 def index4():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     setGlobalVars()
     logIp("index_line4")
 
@@ -648,14 +669,16 @@ def index4():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line4.html', **templateData)
 
 @app.route('/line4', methods=['POST'])
 def my_form_post4():
-    global  numSamples1, numSamples2
+    global  numSamples1, numSamples2, lineType
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -706,7 +729,9 @@ def my_form_post4():
         'downTime30d'               : totalStoppedTime30d,
         'timesStopped30d'           : timesStopped30d,
         'productivity30d'           : productivity30d,
-        'avgSpeed'                  : avgSpeed
+        'avgSpeed'                  : avgSpeed,
+        'lineType'                  : lineType,
+        'timeNow'                   : str(datetime.now())[:19]
     }
 
     return render_template('line4.html', **templateData)

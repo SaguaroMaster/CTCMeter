@@ -15,6 +15,7 @@ from statistics import mean
 from collections import deque
 from platform import system as sys
 
+
 ## GPIO PINS TO USE FOR SENSOR
 SENSOR_PIN1 = 4
 SENSOR_PIN2 = 27
