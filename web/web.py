@@ -19,8 +19,10 @@ hostName = str(platform.node())
 
 if hostName == 'ctcpi':
     lineType = 'CTC'
+    lineType2 = 'Taping'
 elif hostName == 'tapingpi':
     lineType = 'Taping'
+    lineType2 = 'CTC'
 else:
     lineType = 'unknown device/hostname'
 
@@ -249,7 +251,7 @@ def saveToExcel(csvName):
 ######################################################################
 @app.route("/")
 def index():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     setGlobalVars()
     logIp("index_line1")
 
@@ -302,6 +304,7 @@ def index():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -309,7 +312,7 @@ def index():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -362,6 +365,7 @@ def my_form_post():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -375,7 +379,7 @@ def my_form_post():
 ######################################################################
 @app.route("/line2")
 def index2():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     setGlobalVars()
     logIp("index_line2")
 
@@ -428,6 +432,7 @@ def index2():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -435,7 +440,7 @@ def index2():
 
 @app.route('/line2', methods=['POST'])
 def my_form_post2():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -488,6 +493,7 @@ def my_form_post2():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -501,7 +507,7 @@ def my_form_post2():
 ######################################################################
 @app.route("/line3")
 def index3():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     setGlobalVars()
     logIp("index_line3")
 
@@ -554,6 +560,7 @@ def index3():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -561,7 +568,7 @@ def index3():
 
 @app.route('/line3', methods=['POST'])
 def my_form_post3():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     numSamples2 = request.form['numSamples2']
     numSamples2 = datetime.strptime(numSamples2, "%Y-%m-%d")
 
@@ -614,6 +621,7 @@ def my_form_post3():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -627,7 +635,7 @@ def my_form_post3():
 ######################################################################
 @app.route("/line4")
 def index4():
-    global  numSamples1, numSamples2, lineType
+    global  numSamples1, numSamples2, lineType, lineType2
     setGlobalVars()
     logIp("index_line4")
 
@@ -681,6 +689,7 @@ def index4():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
+        'lineType2'                  : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
