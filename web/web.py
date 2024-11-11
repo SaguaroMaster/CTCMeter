@@ -25,6 +25,7 @@ elif hostName == 'tapingpi':
     lineType2 = 'CTC'
 else:
     lineType = 'unknown device/hostname'
+    lineType2 = 'unknown device/hostname'
 
 
 if sys() == 'Windows':
@@ -118,6 +119,10 @@ def getProductivityToday(numSamples2, lineNum):
 
     curs.execute("SELECT * FROM stops"+ str(lineNum) +" WHERE timestamp >= '" + str(numSamples2 - timedelta(days=1)) + "' AND timestamp <= '"+ str(numSamples2) +"';")
     data = curs.fetchall()
+
+    curs.execute("SELECT * FROM data"+ str(lineNum) +" ORDER BY timestamp DESC LIMIT 1")
+    data2 = curs.fetchall()
+    LastDate = datetime(*datetime.strptime(data2[0][0], "%Y-%m-%d %H:%M:%S").timetuple()[:6])
     
     StoppedDates = []
     StoppedIntervals = []
@@ -129,8 +134,20 @@ def getProductivityToday(numSamples2, lineNum):
 
             Date = datetime(*datetime.strptime(i[0], "%Y-%m-%d %H:%M:%S").timetuple()[:6])
 
+            if i[0] == data[0][0] and i[1] == 1 and i[2] == 0: 
+                # if its the first iteration of for
+
+                ShiftChangeTime = Date.replace(hour = 6, minute = 0, second = 0)
+                timeDelta = Date - ShiftChangeTime
+                StoppedDates.append([ShiftChangeTime, Date])
+
+            elif i[0] == data[len(data)-1][0] and i[1] == 0 and i[2] == 1:
+
+                timeDelta = Date - LastDate
+                StoppedDates.append([Date, LastDate])
+
             if i[1] == 1 and i[2] == 0 and oldState !=1:
-                # its a start
+                # its a start 
                 timeDelta = Date - oldDate
                 if timeDelta > timedelta(seconds = 20):
                     StoppedDates.append([oldDate, Date])
@@ -145,6 +162,8 @@ def getProductivityToday(numSamples2, lineNum):
         
         timesStopped = len(StoppedIntervals)
         totalStoppedTime = sum(StoppedIntervals, timedelta())
+
+        print(StoppedDates)
 
         return totalStoppedTime, timesStopped, StoppedDates
     
@@ -155,9 +174,15 @@ def getProductivityMonth(numSamples2, lineNum):
 
     curs.execute("SELECT * FROM stops"+ str(lineNum) +" WHERE timestamp >= '" + str(numSamples2 - timedelta(days=30)) + "' AND timestamp <= '"+ str(numSamples2) +"';")
     data = curs.fetchall()
+
+    curs.execute("SELECT * FROM data"+ str(lineNum) +" ORDER BY timestamp DESC LIMIT 1")
+    data2 = curs.fetchall()
+    LastDate = datetime(*datetime.strptime(data2[0][0], "%Y-%m-%d %H:%M:%S").timetuple()[:6])
     
     StoppedDates = []
     StoppedIntervals = []
+
+    
 
     if len(data) != 0:
         oldDate = datetime(*datetime.strptime(data[0][0], "%Y-%m-%d %H:%M:%S").timetuple()[:6])
@@ -166,8 +191,22 @@ def getProductivityMonth(numSamples2, lineNum):
 
             Date = datetime(*datetime.strptime(i[0], "%Y-%m-%d %H:%M:%S").timetuple()[:6])
 
+            if i[0] == data[0][0] and i[1] == 1 and i[2] == 0: 
+                # if its the first iteration of for
+
+                ShiftChangeTime = Date.replace(hour = 6, minute = 0, second = 0)
+                timeDelta = Date - ShiftChangeTime
+                StoppedDates.append([ShiftChangeTime, Date])
+
+            elif i[0] == data[len(data)-1][0] and i[1] == 0 and i[2] == 1:
+                # if its the last iteration of for
+
+                timeDelta = Date - LastDate
+                StoppedDates.append([Date, LastDate])
+
             if i[1] == 1 and i[2] == 0 and oldState !=1:
                 # its a start
+
                 timeDelta = Date - oldDate
                 if timeDelta > timedelta(seconds = 20):
                     StoppedDates.append([oldDate, Date])
@@ -182,6 +221,8 @@ def getProductivityMonth(numSamples2, lineNum):
         
         timesStopped = len(StoppedIntervals)
         totalStoppedTime = sum(StoppedIntervals, timedelta())
+
+        
 
         return totalStoppedTime, timesStopped, StoppedDates
     
@@ -255,10 +296,9 @@ def index():
     setGlobalVars()
     logIp("index_line1")
 
-    numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2_1)[:10]
+    numSamples2_disp = str(numSamples2)[:10]
     
     lastDate, power, length = getLastData(1)
     firstDate = getFirstData(1)
@@ -304,7 +344,7 @@ def index():
         'productivity30d'           : productivity30d,
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
-        'lineType2'                  : lineType2,
+        'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19]
     }
 
@@ -383,10 +423,9 @@ def index2():
     setGlobalVars()
     logIp("index_line2")
 
-    numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2_1)[:10]
+    numSamples2_disp = str(numSamples2)[:10]
     
     lastDate, power, length = getLastData(2)
     firstDate = getFirstData(2)
@@ -510,11 +549,9 @@ def index3():
     global  numSamples1, numSamples2, lineType, lineType2
     setGlobalVars()
     logIp("index_line3")
-
-    numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2_1)[:10]
+    numSamples2_disp = str(numSamples2)[:10]
     
     lastDate, power, length = getLastData(3)
     firstDate = getFirstData(3)
@@ -639,11 +676,9 @@ def index4():
     setGlobalVars()
     logIp("index_line4")
 
-
-    numSamples2_1 = numSamples2 + timedelta(days=1, hours = 6)
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2_1)[:10]
+    numSamples2_disp = str(numSamples2)[:10]
     
     lastDate, power, length = getLastData(4)
     firstDate = getFirstData(4)
