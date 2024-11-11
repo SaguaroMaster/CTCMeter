@@ -106,11 +106,11 @@ def getHistDataLengthMonthly (numSamples2, lineNum):
 	timeInterval = pandas.date_range(str(numSamples2 - timedelta(days=365))[:10],str(numSamples2)[:10],freq='M').tolist()
 	for entry1 in timeInterval[:len(timeInterval)]:
 		entry2 = entry1 + dateutil.relativedelta.relativedelta(months=1)
-		curs.execute("SELECT SUM(speed) FROM data"+ str(lineNum) +" WHERE timestamp >= '" + str(entry1) + "' AND timestamp <= '" + str(entry2) + "'")
+		curs.execute("SELECT SUM(speed) FROM data" + str(lineNum) + " WHERE timestamp >= '" + str(entry1) + "' AND timestamp <= '" + str(entry2) + "'")
 		dataSum = curs.fetchall()
 		datesSum.append(str(entry2))
 		lengthSum.append(dataSum[0][0])
-	lengthSum = [0 if v is None else v*5 for v in lengthSum]
+	lengthSum = [0 if v is None else v*1 for v in lengthSum] # *1 because of 60 second saving period
 
 	return datesSum, lengthSum
 
