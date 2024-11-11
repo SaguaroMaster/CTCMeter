@@ -298,7 +298,7 @@ def index():
 
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2)[:10]
+    numSamples2_disp = str(numSamples2 - timedelta(days = 1))[:10]
     
     lastDate, power, length = getLastData(1)
     firstDate = getFirstData(1)
@@ -425,7 +425,7 @@ def index2():
 
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2)[:10]
+    numSamples2_disp = str(numSamples2 - timedelta(days = 1))[:10]
     
     lastDate, power, length = getLastData(2)
     firstDate = getFirstData(2)
@@ -551,7 +551,7 @@ def index3():
     logIp("index_line3")
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2)[:10]
+    numSamples2_disp = str(numSamples2 - timedelta(days = 1))[:10]
     
     lastDate, power, length = getLastData(3)
     firstDate = getFirstData(3)
@@ -678,7 +678,7 @@ def index4():
 
     
     numSamples1_disp = str(numSamples1)[:10]
-    numSamples2_disp = str(numSamples2)[:10]
+    numSamples2_disp = str(numSamples2 - timedelta(days = 1))[:10]
     
     lastDate, power, length = getLastData(4)
     firstDate = getFirstData(4)
