@@ -124,15 +124,25 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            Get Graph Data: &nbsp;
-            <form method="POST">
+            From: &nbsp;
+            <form method="POST" style="width: 500px">
               <div class="input-group no-border">
+
+                  <input class="form-control" type="date" id="start" name="numSamples1"
+                  value="{{minDateSel}}" 
+                  min="{{minDate}}"
+                  max="{{maxDate}}"
+                  style="margin: 2%">
+
+                  <div style="text-align: center; vertical-align: middle; line-height: 60px;" id="navigation">
+                  To:
+                  </div>
 
                   <input class="form-control" type="date" id="end" name="numSamples2"
                   value="{{maxDateSel}}" 
                   min="{{minDate}}"
                   max="{{maxDate}}"
-                  style="margin: .5%">
+                  style="margin: 2%">
         
                   <input type="submit" class="btn btn-info" style="margin: 2%;">
                 
@@ -193,7 +203,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-refresh"></i>
-                  On the current spool
+                  Currently
                 </div>
               </div>
             </div>
@@ -246,7 +256,7 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-clock-o"></i>
-                  On the selected day
+                  In the selected time period
                 </div>
               </div>
             </div>
@@ -259,7 +269,7 @@
 
 
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -270,8 +280,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Downtime 24h</p>
-                      <p class="card-title">{{productivity24h}}%, {{downTime24h}}<p>
+                      <p class="card-category">Downtime</p>
+                      <p class="card-title">{{productivity}}%, {{downTime}}<p>
                     </div>
                   </div>
                 </div>
@@ -280,12 +290,12 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-calendar-o"></i>
-                  Downtime on the selected day from 06:00 to 06:00 the next day. [HH:MM:SS]
+                  Downtime in the selected time period. 24hr by default [HH:MM:SS]
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card card-stats">
               <div class="card-body ">
                 <div class="row">
@@ -296,8 +306,8 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Times stopped 24h</p>
-                      <a href="./downtime24hl4"><p class="card-title">{{timesStopped24h}}<p></p></a>
+                      <p class="card-category">Times stopped</p>
+                      <a href="./downtime24hl1"><p class="card-title">{{timesStopped}}<p></p></a>
                     </div>
                   </div>
                 </div>
@@ -306,89 +316,28 @@
                 <hr>
                 <div class="stats">
                   <i class="fa fa-calendar-o"></i>
-                  Line stopped for >10s this many times on the selected day
+                  Line stopped for >10s this many times in the selected time period. 24hr by default.
                 </div>
               </div>
             </div>
           </div>
           
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-watch-time text-info"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Downtime 30d</p>
-                      <p class="card-title">{{productivity30d}}%, {{downTime30d}}<p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  Downtime in the past 30 days starting from the selected day. [HH:MM:SS]
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-watch-time text-info"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Times stopped 30d</p>
-                      <a href="./downtime30dl4"><p class="card-title">{{timesStopped30d}}<p></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  Line was stopped for >10s in the past 30 days starting from the selected day.
-                </div>
-              </div>
-            </div>
-          </div>
           
         </div>
 
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">Line Speed (1 minute average)</h5>
               </div>
               <div class="card-body">
-                <canvas id="power-today" data-graphdatax='{{ speedX|tojson }}' data-graphdatay='{{ speedY|tojson }}' height="100"></canvas>
+                <canvas id="power-today" data-graphdatax='{{ speedX|tojson }}' data-graphdatay='{{ speedY|tojson }}' height="55"></canvas>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-title">Meters made / Month</h5>
-              </div>
-              <div class="card-body">
-                <canvas id="daily-energy" data-graphdatax='{{ lengthsDailyX|tojson }}' data-graphdatay='{{ lengthsDailyY|tojson }}' height="100"></canvas>
-              </div>
-            </div>
-          </div>
+          
         </div>
       
         <div class="row">
@@ -401,6 +350,16 @@
                 <canvas id="average-energy" data-graphdatax='{{ lengthX|tojson }}' data-graphdatay='{{ lengthY|tojson }}' height="100"></canvas>
               </div>
               
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-title">Meters made / Month</h5>
+              </div>
+              <div class="card-body">
+                <canvas id="daily-energy" data-graphdatax='{{ lengthsDailyX|tojson }}' data-graphdatay='{{ lengthsDailyY|tojson }}' height="100"></canvas>
+              </div>
             </div>
           </div>
           
@@ -439,6 +398,9 @@
   <script src="../static/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../static/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+  <script type="text/javascript">
+    const lineSampleNums = {{ lineSampleNums | tojson}}
+  </script>
   <script src="../static/demo/demo.js"></script>
   <script>
     $(document).ready(function() {

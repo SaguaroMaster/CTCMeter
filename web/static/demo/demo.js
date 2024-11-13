@@ -18,13 +18,13 @@ const verticalLinePlugin = {
 
       // render vertical line
       context.beginPath();
-      context.strokeStyle = '#ff0000';
+      context.strokeStyle = '#dbdbdb';
       context.moveTo(lineLeftOffset, scale.top);
       context.lineTo(lineLeftOffset, scale.bottom);
       context.stroke();
 
       // write label
-      context.fillStyle = "#ff0000";
+      context.fillStyle = "#7d7d7d";
       context.textAlign = 'center';
       context.fillText('', lineLeftOffset, (scale.bottom - scale.top) / 2 + scale.top);
 
@@ -61,6 +61,7 @@ demo = {
       }
     });
   },
+  
 
   initChartsPages: function() {
     chartColor = "#FFFFFF";
@@ -130,7 +131,7 @@ demo = {
 
       },
       
-      lineAtIndex: [720]
+      lineAtIndex: lineSampleNums
     });
 
     ctx = document.getElementById('daily-energy').getContext("2d");
@@ -264,7 +265,7 @@ demo = {
           }]
         },
       },
-      lineAtIndex: [720]
+      lineAtIndex: lineSampleNums
     });
 
   },
