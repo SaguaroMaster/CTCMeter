@@ -849,10 +849,10 @@ def downloadcsv():
     return send_from_directory("/home/pi", csvName)
 
 @app.route("/downtimel1")
-def downtime24hl1():
+def downtimel1():
     global numSamples1, numSamples2, lineType, lineType2, maxSampleCount
 
-    logIp("downtimel1 " + str(numSamples2))
+    logIp("downtimel1 " + str(numSamples1) + " - " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h, x = getProductivity(numSamples1, numSamples2, 1)
 
@@ -864,10 +864,10 @@ def downtime24hl1():
     return formattedString
 
 @app.route("/downtimel2")
-def downtime24hl2():
+def downtimel2():
     global numSamples1, numSamples2, lineType, lineType2, maxSampleCount
 
-    logIp("downtimel2 " + str(numSamples2))
+    logIp("downtimel2 " + str(numSamples1) + " - " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h, x = getProductivity(numSamples1, numSamples2, 2)
 
@@ -879,10 +879,10 @@ def downtime24hl2():
     return formattedString
 
 @app.route("/downtimel3")
-def downtime24hl3():
+def downtimel3():
     global numSamples1, numSamples2, lineType, lineType2, maxSampleCount
 
-    logIp("downtimel3 " + str(numSamples2))
+    logIp("downtimel3 " + str(numSamples1) + " - " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h, x = getProductivity(numSamples1, numSamples2, 3)
 
@@ -894,10 +894,10 @@ def downtime24hl3():
     return formattedString
 
 @app.route("/downtimel4")
-def downtime24hl4():
+def downtimel4():
     global numSamples1, numSamples2, lineType, lineType2, maxSampleCount
 
-    logIp("downtimel4 " + str(numSamples2))
+    logIp("downtimel4 " + str(numSamples1) + " - " + str(numSamples2))
     
     totalStoppedTime24h, timesStopped24h, StoppedDates24h, x = getProductivity(numSamples1, numSamples2, 4)
 
