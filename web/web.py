@@ -9,6 +9,7 @@ import threading
 import pandas
 import dateutil.relativedelta
 import sqlite3
+import socket
 import platform
 import os
 import csv
@@ -43,7 +44,8 @@ maxSampleCount = 1500
 def logIp(page):
 
     ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
-    curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip, page))
+    name = socket.gethostbyaddr(ip)
+    curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip + " - " + str(name), page))
     conn.commit()
 
 def readLog():
