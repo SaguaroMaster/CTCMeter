@@ -341,24 +341,27 @@
         </div>
       
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">Length logged</h5>
               </div>
               <div class="card-body">
-                <canvas id="average-energy" data-graphdatax='{{ lengthX|tojson }}' data-graphdatay='{{ lengthY|tojson }}' height="100"></canvas>
+                <canvas id="average-energy" data-graphdatax='{{ lengthX|tojson }}' data-graphdatay='{{ lengthY|tojson }}' height="55"></canvas>
               </div>
               
             </div>
           </div>
-          <div class="col-md-6">
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12">
             <div class="card card-chart">
               <div class="card-header">
                 <h5 class="card-title">Meters made / Month</h5>
               </div>
               <div class="card-body">
-                <canvas id="daily-energy" data-graphdatax='{{ lengthsDailyX|tojson }}' data-graphdatay='{{ lengthsDailyY|tojson }}' height="100"></canvas>
+                <canvas id="daily-energy" data-graphdatax='{{ lengthsDailyX|tojson }}' data-graphdatay='{{ lengthsDailyY|tojson }}' height="55"></canvas>
               </div>
             </div>
           </div>

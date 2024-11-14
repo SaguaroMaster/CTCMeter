@@ -182,7 +182,10 @@ def getProductivity(numSamples1, numSamples2, lineNum): #not actually for 24h bu
         timesStopped = len(StoppedIntervals)
         totalStoppedTime = sum(StoppedIntervals, timedelta())
 
-        productivity = round(totalStoppedTime / (LastDate - FirstDate) * 100, 1)
+        try:
+            productivity = round(totalStoppedTime / (LastDate - FirstDate) * 100, 1)
+        except:
+            productivity = 0
 
         return totalStoppedTime, timesStopped, StoppedDates, productivity
 
