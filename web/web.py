@@ -277,8 +277,6 @@ def index():
         LineSampleNums = [720, 1440]
 
 
-
-
     templateData = {
         'speed'						: power,
         'length'    				: length,

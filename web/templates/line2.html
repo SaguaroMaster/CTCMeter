@@ -52,12 +52,14 @@
               <p>{{lineType}} 3</p>
             </a>
           </li>
+          {% if lineType != "CTC" %}
           <li>
             <a href="./line4">
               <i class="nc-icon nc-bank"></i>
               <p>{{lineType}} 4</p>
             </a>
           </li>
+          {% endif %}
           <li class="">
             <a href="http://192.168.8.183:8000">
               <i class="nc-icon nc-bank"></i>
