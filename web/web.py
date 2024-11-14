@@ -44,8 +44,8 @@ maxSampleCount = 1500
 def logIp(page):
 
     ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
-    #name = socket.gethostbyaddr(ip)
-    curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip, page))
+    name = socket.gethostbyaddr(ip)
+    curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip + " - " + str(name), page))
     conn.commit()
 
 def readLog():
