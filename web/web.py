@@ -3,7 +3,7 @@
 
 from datetime import datetime, timedelta
 from platform import system as sys
-from flask import Flask, render_template, send_from_directory, request
+from flask import Flask, render_template, send_from_directory, request, redirect
 
 import threading
 import pandas
@@ -300,6 +300,10 @@ def index():
         'timeNow'                   : str(datetime.now())[:19],
         'lineSampleNums'            : LineSampleNums
     }
+
+    ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
+    if ip == '192.168.8.6':
+        return redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 
     return render_template('line1.html', **templateData)
 
