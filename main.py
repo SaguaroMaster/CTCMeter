@@ -399,27 +399,20 @@ while True:
       f1 = open(saveFilePath1, "w")
       f1.write(str(length1))
       f1.close()
+      time.sleep(0.1)
       f2 = open(saveFilePath2, "w")
       f2.write(str(length2))
       f2.close()
+      time.sleep(0.1)
       f3 = open(saveFilePath3, "w")
       f3.write(str(length3))
       f3.close()
+      time.sleep(0.1)
       f4 = open(saveFilePath4, "w")
       f4.write(str(length4))
       f4.close()
+      time.sleep(0.1)
       time4 = time.time()
-
-      print(f'''
-         Line 1 Speed : {speed1}    [m/min]
-         Line 1 Length: {length1}   [m]
-         Line 2 Speed : {speed2}    [m/min]
-         Line 2 Length: {length2}   [m]
-         Line 3 Speed : {speed3}    [m/min]
-         Line 3 Length: {length3}   [m]
-         Line 4 Speed : {speed4}    [m/min]
-         Line 4 Length: {length4}   [m]
-      ''')
 
    if speed1 == 0 and machineState1 == 1:
       machineState1 = 0

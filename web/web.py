@@ -275,18 +275,20 @@ def index():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
 
     templateData = {
@@ -371,18 +373,20 @@ def my_form_post():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
@@ -459,18 +463,20 @@ def index2():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
@@ -551,19 +557,21 @@ def my_form_post2():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
 
     templateData = {
@@ -638,19 +646,21 @@ def index3():
         Dates = Dates[1::Factor]
     
     else:
+        Factor = 1
         LineSampleNums = [720, 1440]
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
@@ -731,18 +741,20 @@ def my_form_post3():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
@@ -819,18 +831,20 @@ def index4():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
@@ -910,18 +924,20 @@ def my_form_post4():
     
     else:
         LineSampleNums = [720, 1440]
+        Factor = 1
 
-    LineSampleNums2 = LineSampleNums
     LengthPerShift = []
     OldLength = Lengths[0]
-    for i in LineSampleNums2:
+    print(LineSampleNums)
+    for i in LineSampleNums:
         if i < len(Lengths):
             CurrLength = Lengths[i]
         else:
             CurrLength = Lengths[len(Lengths)-1] 
         Sum = CurrLength - OldLength
         OldLength = CurrLength
-        LengthPerShift.append(round(Sum))
+        if len(Lengths)+ (720/Factor+1) >= i:
+            LengthPerShift.append(round(Sum))
 
     templateData = {
         'speed'						: power,
