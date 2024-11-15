@@ -208,8 +208,8 @@ def getProductivity(numSamples1, numSamples2, lineNum): #not actually for 24h bu
         return timedelta(seconds=0), 0, StoppedDates, 0
 
 
-def getAvgSpeed(numSamples2, lineNum):
-    curs.execute("SELECT AVG(speed) FROM data"+ str(lineNum) +" WHERE timestamp >= '" + str(numSamples2 - timedelta(days=1)) + "' AND timestamp <= '"+ str(numSamples2) +"';")
+def getAvgSpeed(numSamples1, numSamples2, lineNum):
+    curs.execute("SELECT AVG(speed) FROM data"+ str(lineNum) +" WHERE timestamp >= '" + str(numSamples1) + "' AND timestamp <= '"+ str(numSamples2) +"';")
     dataSum = curs.fetchall()
     avgSpeed = round(dataSum[0][0], 1)
 
@@ -250,7 +250,7 @@ def index():
 
     Dates, Speeds, Lengths = getHistData(numSamples1, numSamples2, 1)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 1)
-    avgSpeed = getAvgSpeed(numSamples2, 1)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 1)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 1)
 
@@ -276,6 +276,18 @@ def index():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
 
     templateData = {
         'speed'						: power,
@@ -298,7 +310,8 @@ def index():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     '''ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
@@ -333,7 +346,7 @@ def my_form_post():
 
     Dates, Speeds, Lengths = getHistData(numSamples1, numSamples2, 1)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 1)
-    avgSpeed = getAvgSpeed(numSamples2, 1)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 1)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 1)
 
@@ -359,6 +372,18 @@ def my_form_post():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -380,7 +405,8 @@ def my_form_post():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line1.html', **templateData)
@@ -408,7 +434,7 @@ def index2():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 2)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 2)
-    avgSpeed = getAvgSpeed(numSamples2, 2)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 2)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 2)
 
@@ -434,6 +460,18 @@ def index2():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -455,7 +493,8 @@ def index2():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line2.html', **templateData)
@@ -487,7 +526,7 @@ def my_form_post2():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 2)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 2)
-    avgSpeed = getAvgSpeed(numSamples2, 1)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 2)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 2)
 
@@ -513,6 +552,20 @@ def my_form_post2():
     else:
         LineSampleNums = [720, 1440]
 
+
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -534,7 +587,8 @@ def my_form_post2():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line2.html', **templateData)
@@ -561,7 +615,7 @@ def index3():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 3)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 3)
-    avgSpeed = getAvgSpeed(numSamples2, 3)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 3)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 3)
     for i in range(len(Dates)):
@@ -586,6 +640,18 @@ def index3():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -607,7 +673,8 @@ def index3():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line3.html', **templateData)
@@ -639,7 +706,7 @@ def my_form_post3():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 3)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 3)
-    avgSpeed = getAvgSpeed(numSamples2, 3)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 3)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 3)
 
@@ -665,6 +732,18 @@ def my_form_post3():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -686,7 +765,8 @@ def my_form_post3():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line3.html', **templateData)
@@ -714,7 +794,7 @@ def index4():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 4)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 4)
-    avgSpeed = getAvgSpeed(numSamples2, 4)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 4)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 4)
 
@@ -740,6 +820,18 @@ def index4():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -761,7 +853,8 @@ def index4():
         'lineType'                  : lineType,
         'lineType2'                 : lineType2,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line4.html', **templateData)
@@ -792,7 +885,7 @@ def my_form_post4():
 
     Dates, Speeds, Lengths = getHistData(numSamples1,numSamples2, 4)
     DatesSum1, LengthsSum1 = getHistDataLengthMonthly(numSamples2, 4)
-    avgSpeed = getAvgSpeed(numSamples2, 4)
+    avgSpeed = getAvgSpeed(numSamples1, numSamples2, 4)
 
     totalStoppedTime, timesStopped, StoppedDates, productivity = getProductivity(numSamples1, numSamples2, 4)
 
@@ -818,6 +911,18 @@ def my_form_post4():
     else:
         LineSampleNums = [720, 1440]
 
+    LineSampleNums2 = LineSampleNums
+    LengthPerShift = []
+    OldLength = Lengths[0]
+    for i in LineSampleNums2:
+        if i < len(Lengths):
+            CurrLength = Lengths[i]
+        else:
+            CurrLength = Lengths[len(Lengths)-1] 
+        Sum = CurrLength - OldLength
+        OldLength = CurrLength
+        LengthPerShift.append(round(Sum))
+
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -838,7 +943,8 @@ def my_form_post4():
         'avgSpeed'                  : avgSpeed,
         'lineType'                  : lineType,
         'timeNow'                   : str(datetime.now())[:19],
-        'lineSampleNums'            : LineSampleNums
+        'lineSampleNums'            : LineSampleNums,
+        'lengthPerShift'            : LengthPerShift
     }
 
     return render_template('line4.html', **templateData)

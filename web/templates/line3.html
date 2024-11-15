@@ -332,7 +332,7 @@
           <div class="col-md-12">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-title">Line Speed (1 minute average)</h5>
+                <h5 class="card-title">Line Speed</h5>
               </div>
               <div class="card-body">
                 <canvas id="power-today" data-graphdatax='{{ speedX|tojson }}' data-graphdatay='{{ speedY|tojson }}' height="55"></canvas>
@@ -346,7 +346,7 @@
           <div class="col-md-12">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-title">Length logged</h5>
+                <h5 class="card-title">Length logged, Meter/shift: {{lengthPerShift}}</h5>
               </div>
               <div class="card-body">
                 <canvas id="average-energy" data-graphdatax='{{ lengthX|tojson }}' data-graphdatay='{{ lengthY|tojson }}' height="55"></canvas>
