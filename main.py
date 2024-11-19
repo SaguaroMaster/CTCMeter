@@ -302,21 +302,16 @@ date2, machineState2 = getLastStopState(2)
 date3, machineState3 = getLastStopState(3)
 date4, machineState4 = getLastStopState(4)
 
-try:
-   x, length1 = getLastData(1)
-   x, length2 = getLastData(2)
-   x, length3 = getLastData(3)
-   x, length4 = getLastData(4)
+
+x, length1 = getLastData(1)
+x, length2 = getLastData(2)
+x, length3 = getLastData(3)
+x, length4 = getLastData(4)
       
-except:
-   length1 = 0
-   pulseCount21 = 0
-   length2 = 0
-   pulseCount22 = 0
-   length3 = 0
-   pulseCount23 = 0
-   length4 = 0
-   pulseCount24 = 0
+pulseCount21 = round(length1/wheelCircumference1)
+pulseCount22 = round(length2/wheelCircumference2)
+pulseCount23 = round(length3/wheelCircumference3)
+pulseCount24 = round(length4/wheelCircumference4)
 
 
 while True:
