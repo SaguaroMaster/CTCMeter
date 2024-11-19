@@ -202,7 +202,8 @@ def getLastData(lineNum):
 
    for row in curs.execute(query):
       time = row[0]
-   return time
+      length = row[2]
+   return time, length
 
 def getLastStopState(lineNum):
    conn=sqlite3.connect(databaseName)
@@ -302,44 +303,10 @@ date3, machineState3 = getLastStopState(3)
 date4, machineState4 = getLastStopState(4)
 
 try:
-   if os.path.isfile(saveFilePath1) and os.path.isfile(saveFilePath2) and os.path.isfile(saveFilePath3) and os.path.isfile(saveFilePath4):
-      f1 = open(saveFilePath1, "r")
-      length1 = float(f1.read())
-      f1.close()
-      pulseCount21 = length1 / wheelCircumference1
-      f2 = open(saveFilePath2, "r")
-      length2 = float(f2.read())
-      f2.close()
-      pulseCount22 = length2 / wheelCircumference2
-      f3 = open(saveFilePath3, "r")
-      length3 = float(f3.read())
-      pulseCount23 = length3 / wheelCircumference3
-      f3.close()
-      f4 = open(saveFilePath4, "r")
-      length4 = float(f4.read())
-      pulseCount23 = length4 / wheelCircumference4
-      f4.close()
-   else:
-      length1 = 0
-      length2 = 0
-      length3 = 0
-      length4 = 0
-      pulseCount21 = 0
-      pulseCount22 = 0
-      pulseCount23 = 0
-      pulseCount24 = 0
-      f1 = open(saveFilePath1, "w")
-      f1.write(str(length1))
-      f1.close()
-      f2 = open(saveFilePath2, "w")
-      f2.write(str(length2))
-      f2.close()
-      f3 = open(saveFilePath3, "w")
-      f3.write(str(length3))
-      f3.close()
-      f4 = open(saveFilePath4, "w")
-      f4.write(str(length4))
-      f4.close()
+   x, length1 = getLastData(1)
+   x, length2 = getLastData(2)
+   x, length3 = getLastData(3)
+   x, length4 = getLastData(4)
       
 except:
    length1 = 0
@@ -393,26 +360,6 @@ while True:
       logData(round(mean(runningAvgLong2), 2), max(maxLength2), 2)
       logData(round(mean(runningAvgLong3), 2), max(maxLength3), 3)
       logData(round(mean(runningAvgLong4), 2), max(maxLength4), 4)
-   
-   if time.time() > time4 + lengthSavePeriod:
-      
-      f1 = open(saveFilePath1, "w")
-      f1.write(str(length1))
-      f1.close()
-      time.sleep(0.1)
-      f2 = open(saveFilePath2, "w")
-      f2.write(str(length2))
-      f2.close()
-      time.sleep(0.1)
-      f3 = open(saveFilePath3, "w")
-      f3.write(str(length3))
-      f3.close()
-      time.sleep(0.1)
-      f4 = open(saveFilePath4, "w")
-      f4.write(str(length4))
-      f4.close()
-      time.sleep(0.1)
-      time4 = time.time()
 
    if speed1 == 0 and machineState1 == 1:
       machineState1 = 0
