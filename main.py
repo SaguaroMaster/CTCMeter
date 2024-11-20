@@ -8,19 +8,53 @@
 #                                         #
 ###########################################
 
-import os
+import sys
 import time
 import sqlite3
-from statistics import mean
-from collections import deque
-from platform import system as sys
+from platform import system
+from datetime import datetime
 
+loadTime = time.time()
+OS = system()
 
 ## GPIO PINS TO USE FOR SENSOR
 SENSOR_PIN1 = 4
 SENSOR_PIN2 = 27
 SENSOR_PIN3 = 21
 SENSOR_PIN4 = 13
+
+
+if OS == 'Windows':
+   print('Windows detected, no GPIO Functionality')
+   databaseName = './Database.db'
+   logoPath = './logo.png'
+   saveFilePath1 = './lengthBackup1.txt'
+   saveFilePath2 = './lengthBackup2.txt'
+   saveFilePath3 = './lengthBackup3.txt'
+   saveFilePath4 = './lengthBackup4.txt'
+else:
+   databaseName = '/home/pi/Database.db'
+   logoPath = '/home/pi/ConformSpeedometer/logo.png'
+   saveFilePath1 = '/home/pi/lengthBackup1.txt'
+   saveFilePath2 = '/home/pi/lengthBackup2.txt'
+   saveFilePath3 = '/home/pi/lengthBackup3.txt'
+   saveFilePath4 = '/home/pi/lengthBackup4.txt'
+   logFilePath = '/home/pi/logger.log'
+   sys.stdout = open(logFilePath, 'a')
+
+   import gpiozero as GPIO
+
+   sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, bounce_time = 0.001)
+   sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = False, bounce_time = 0.001)
+   sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = False, bounce_time = 0.001)
+   sensor4 = GPIO.Button(SENSOR_PIN4, pull_up = False, bounce_time = 0.001)
+
+print(str(datetime.now()) + ": Initializing...")
+
+import os
+from statistics import mean
+from collections import deque
+
 
 lengthSavePeriod = 3     ## period in seconds in which the current length is saved for backup in case of power outage, crash, etc..
 maxPulseInterval1 = 20   ## max time in seconds between impulses for sensor
@@ -59,31 +93,7 @@ machineState2 = 0
 machineState3 = 0
 machineState4 = 0
 
-OS = sys()
 
-
-if OS == 'Windows':
-   print('Windows detected, no GPIO Functionality')
-   databaseName = './Database.db'
-   logoPath = './logo.png'
-   saveFilePath1 = './lengthBackup1.txt'
-   saveFilePath2 = './lengthBackup2.txt'
-   saveFilePath3 = './lengthBackup3.txt'
-   saveFilePath4 = './lengthBackup4.txt'
-else:
-   databaseName = '/home/pi/Database.db'
-   logoPath = '/home/pi/ConformSpeedometer/logo.png'
-   saveFilePath1 = '/home/pi/lengthBackup1.txt'
-   saveFilePath2 = '/home/pi/lengthBackup2.txt'
-   saveFilePath3 = '/home/pi/lengthBackup3.txt'
-   saveFilePath4 = '/home/pi/lengthBackup4.txt'
-
-   import gpiozero as GPIO
-
-   sensor1 = GPIO.Button(SENSOR_PIN1, pull_up = False, bounce_time = 0.001)
-   sensor2 = GPIO.Button(SENSOR_PIN2, pull_up = False, bounce_time = 0.001)
-   sensor3 = GPIO.Button(SENSOR_PIN3, pull_up = False, bounce_time = 0.001)
-   sensor4 = GPIO.Button(SENSOR_PIN4, pull_up = False, bounce_time = 0.001)
 
 
 if not os.path.isfile(databaseName):
@@ -313,6 +323,7 @@ pulseCount22 = round(length2/wheelCircumference2)
 pulseCount23 = round(length3/wheelCircumference3)
 pulseCount24 = round(length4/wheelCircumference4)
 
+print(str(datetime.now()) + ": Logger Ready, took " + str(round(float(time.time()-loadTime), 2)) + " seconds")
 
 while True:
 

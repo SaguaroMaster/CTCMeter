@@ -1,19 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
+import time
+import sqlite3
+from platform import system
 from datetime import datetime, timedelta
-from platform import system as sys
+
+
+loadTime = time.time()
+
+if system() == 'Windows':
+    conn=sqlite3.connect('./Database.db', check_same_thread=False)
+    databaseName = './Database.db'
+else:
+    conn=sqlite3.connect('/home/pi/Database.db', check_same_thread=False)
+    databaseName = '/home/pi/Database.db'
+    logFilePath = '/home/pi/webServer.log'
+    sys.stdout = open(logFilePath, 'a')
+
+print(str(datetime.now()) + ": Initializing...")
+
 from flask import Flask, render_template, send_from_directory, request, redirect
 
 import threading
 import pandas
 import dateutil.relativedelta
 import sqlite3
-#import socket
 import platform
 import os
 import csv
-
 
 app = Flask(__name__)
 hostName = str(platform.node())
@@ -28,24 +44,12 @@ else:
     lineType = '???'
     lineType2 = '???'
 
-
-if sys() == 'Windows':
-    conn=sqlite3.connect('./Database.db', check_same_thread=False)
-    databaseName = './Database.db'
-else:
-    conn=sqlite3.connect('/home/pi/Database.db', check_same_thread=False)
-    databaseName = '/home/pi/Database.db'
 curs=conn.cursor()
-
 lock = threading.Lock()
-
-maxSampleCount = 1500
+maxSampleCount = 2000
 
 def logIp(page):
-
     ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr) 
-    #name = socket.gethostbyaddr(ip)
-    #curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip + " - " + str(name), page))
     curs.execute("INSERT INTO log values(datetime('now', 'localtime'), (?), (?))", (ip, page))
     conn.commit()
 
@@ -1171,4 +1175,7 @@ def log():
     return logs
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=8000, debug=False)
+    from waitress import serve
+    print(str(datetime.now()) + ": Server Ready, took " + str(round(float(time.time()-loadTime), 2)) + " seconds")
+    serve(app, host="0.0.0.0", port=8000, threads = 6)
+    #app.run(host='0.0.0.0', port=8000, debug=False)
