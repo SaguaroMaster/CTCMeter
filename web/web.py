@@ -30,6 +30,7 @@ import sqlite3
 import platform
 import os
 import csv
+from scipy.signal import find_peaks
 
 app = Flask(__name__)
 hostName = str(platform.node())
@@ -287,24 +288,27 @@ def index():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
 
     templateData = {
@@ -397,24 +401,28 @@ def my_form_post():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
     templateData = {
         'speed'						: power,
@@ -499,24 +507,27 @@ def index2():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
     templateData = {
         'speed'						: power,
@@ -606,25 +617,27 @@ def my_form_post2():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
-
+        LineSampleNums = LineSampleNums[:-1]
         
 
     templateData = {
@@ -708,24 +721,28 @@ def index3():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
+        LineSampleNums = LineSampleNums[:-1]
 
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
     templateData = {
         'speed'						: power,
         'length'    				: length,
@@ -813,24 +830,27 @@ def my_form_post3():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
     templateData = {
         'speed'						: power,
@@ -915,24 +935,27 @@ def index4():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
     templateData = {
         'speed'						: power,
@@ -1020,24 +1043,27 @@ def my_form_post4():
             ShiftChangeFlag = 1
         elif int(i[6:8]) == 7 and ShiftChangeFlag == 1:
             ShiftChangeFlag = 0
+            
+    OldLineSampleNum = 0
+    LengthPerShift = []
+    LineSampleNums.append(len(Lengths)-1)
+
+    for i in LineSampleNums:
+        LengthsLocal = Lengths[OldLineSampleNum:i]
+        peaks, _ = find_peaks(LengthsLocal)
+        peak_values = [LengthsLocal[j] for j in peaks]  
+        OldLineSampleNum = i
+        try:
+            if len(peaks) > 0 or LengthsLocal[-1] > LengthsLocal[0]:
+                LengthPerShift.append(round(sum(peak_values) + LengthsLocal[-1] - LengthsLocal[0]))
+            else:
+                LengthPerShift.append(0)
+        except:
+            pass
+
     if len(LineSampleNums) > 0:
         LineSampleNums.pop(0)
-
-    LengthPerShift = []
-    OldLength = Lengths[0]
-    for i in LineSampleNums:
-        if i < len(Lengths):
-            CurrLength = Lengths[i]
-        else:
-            CurrLength = Lengths[len(Lengths)-1] 
-        Sum = CurrLength - OldLength
-        OldLength = CurrLength
-        if len(Lengths) + (720/Factor+1) >= i:
-            LengthPerShift.append(round(Sum))
-    if len(LineSampleNums) > 0:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[LineSampleNums[-1]]))
-    else:
-        LengthPerShift.append(round(Lengths[-1] - Lengths[0]))
+        LineSampleNums = LineSampleNums[:-1]
 
 
     templateData = {
