@@ -40,3 +40,12 @@ insert at the end:
 database that is used on autostart will be saved in home directory of user.
 
 note: run app as root
+
+if there is not enough space to install new stuff:
+
+sudo apt autoremove && sudo apt autoclean
+df -h
+sudo du -xh --max-depth=1 /var
+sudo du -xh --max-depth=1 /var/log
+# Note, change +30 to the number of days you want to keep.
+sudo find /var/log -mtime +30 -type f -delete
