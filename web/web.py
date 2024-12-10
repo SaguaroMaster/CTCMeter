@@ -21,7 +21,7 @@ else:
 
 print(str(datetime.now()) + ": Initializing...")
 
-from flask import Flask, render_template, send_from_directory, request, redirect
+from flask import Flask, render_template, send_from_directory, request, redirect, send_file
 
 import threading
 import pandas
@@ -30,6 +30,9 @@ import sqlite3
 import platform
 import os
 import csv
+from glob import glob
+from io import BytesIO
+from zipfile import ZipFile
 from scipy.signal import find_peaks
 
 app = Flask(__name__)
@@ -221,15 +224,42 @@ def getAvgSpeed(numSamples1, numSamples2, lineNum):
     return avgSpeed
 
 def saveToExcel(csvName):
-    curs.execute("SELECT * FROM data;")
-    data = curs.fetchall()
-    if os.path.isfile(csvName):
+    curs.execute("SELECT * FROM data1;")
+    data1 = curs.fetchall()
+    curs.execute("SELECT * FROM data2;")
+    data2 = curs.fetchall()
+    curs.execute("SELECT * FROM data3;")
+    data3 = curs.fetchall()
+    curs.execute("SELECT * FROM data4;")
+    data4 = curs.fetchall()
+    if os.path.isfile(csvName + '_line1.csv'):
+        os.remove(csvName)
+    if os.path.isfile(csvName + '_line2.csv'):
+        os.remove(csvName) 
+    if os.path.isfile(csvName + '_line3.csv'):
+        os.remove(csvName) 
+    if os.path.isfile(csvName + '_line4.csv'):
         os.remove(csvName) 
 
-    with open(csvName, 'w', newline='') as csvfile:
+    with open(csvName + '_line1.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(['Date and Time', 'Speed [m/min]', 'Length [m]', 'Alarm Setting [m]'])
-        writer.writerows(data)
+        writer.writerows(data1)
+    
+    with open(csvName + '_line2.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Date and Time', 'Speed [m/min]', 'Length [m]', 'Alarm Setting [m]'])
+        writer.writerows(data2)
+    
+    with open(csvName + '_line3.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Date and Time', 'Speed [m/min]', 'Length [m]', 'Alarm Setting [m]'])
+        writer.writerows(data3)
+    
+    with open(csvName + '_line4.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(['Date and Time', 'Speed [m/min]', 'Length [m]', 'Alarm Setting [m]'])
+        writer.writerows(data4)
 
 
 
@@ -1158,9 +1188,24 @@ def download():
 def downloadcsv():
     logIp("downloadCSV")
 
-    csvName = 'ExportedData.csv'
+    csvName = 'ExportedData'
     saveToExcel(csvName)
-    return send_from_directory("/home/pi", csvName)
+    #return send_from_directory("/home/pi", csvName)
+
+
+    target = '/home/pi'
+
+    stream = BytesIO()
+    with ZipFile(stream, 'w') as zf:
+        for file in glob(os.path.join(target, '*.csv')):
+            zf.write(file, os.path.basename(file))
+    stream.seek(0)
+
+    return send_file(
+        stream,
+        as_attachment=True,
+        download_name='ExportedData.zip'
+    )
 
 @app.route("/downtimel1")
 def downtimel1():
